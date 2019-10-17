@@ -1,10 +1,10 @@
 package ada.septimaback.springbootdemo.service;
 
 import ada.septimaback.springbootdemo.model.Cumpleanio;
+import ada.septimaback.springbootdemo.persistence.CumpleanioRepository;
 import ada.septimaback.springbootdemo.persistence.CumpleanioStorage;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,14 +12,14 @@ import java.util.stream.Collectors;
 public class CumpleanioService {
     private List<Cumpleanio> cumpleanios;
 
-    private CumpleanioStorage cumpleanioStorage;
-    public CumpleanioService(CumpleanioStorage cumpleanioStorage) {
+    private CumpleanioRepository cumpleanioRepository;
+    public CumpleanioService(CumpleanioRepository cumpleanioRepository) {
 
-        this.cumpleanioStorage = cumpleanioStorage;
+        this.cumpleanioRepository = cumpleanioRepository;
     }
 
     public List<Cumpleanio> cumpleanios(String mes){
-        cumpleanios = cumpleanioStorage.cumpleanios();
+        cumpleanios = cumpleanioRepository.findAll();
 
         if(mes == null) {
             return cumpleanios;
@@ -28,6 +28,9 @@ public class CumpleanioService {
                     cumpleanio -> cumpleanio.getMes().equals(mes))
                     .collect(Collectors.toList());
         }
+    }
 
+    public Cumpleanio addCumpleanio(Cumpleanio cumpleanio) {
+        return cumpleanioRepository.save(cumpleanio);
     }
 }

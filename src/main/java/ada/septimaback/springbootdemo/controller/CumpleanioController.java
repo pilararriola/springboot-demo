@@ -2,9 +2,7 @@ package ada.septimaback.springbootdemo.controller;
 
 import ada.septimaback.springbootdemo.model.Cumpleanio;
 import ada.septimaback.springbootdemo.service.CumpleanioService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,10 @@ public class CumpleanioController {
     public List<Cumpleanio> cumpleanios(
             @RequestParam(value="mes", required = false) String mes){
         return cumpleanioService.cumpleanios(mes);
+    }
+
+    @PostMapping("/cumpleanios")
+    public Cumpleanio addBirthday(@RequestBody Cumpleanio cumpleanio){
+        return cumpleanioService.addCumpleanio(cumpleanio);
     }
 }

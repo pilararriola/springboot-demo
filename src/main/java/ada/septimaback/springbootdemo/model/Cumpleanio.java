@@ -1,8 +1,15 @@
 package ada.septimaback.springbootdemo.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name="cumpleanio")
 public class Cumpleanio implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private Long id;
     private String nombre;
     private String mes;
     private Integer dia;
@@ -11,7 +18,8 @@ public class Cumpleanio implements Serializable {
 
     }
 
-    public Cumpleanio(String nombre, String mes, Integer dia){
+    public Cumpleanio(Long id, String nombre, String mes, Integer dia){
+        this.id = id;
         this.nombre = nombre;
         this.mes = mes;
         this.dia = dia;
@@ -39,5 +47,13 @@ public class Cumpleanio implements Serializable {
 
     public void setDia(Integer dia) {
         this.dia = dia;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
